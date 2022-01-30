@@ -133,15 +133,14 @@ tips = [
   "The starting version of this program was created in 3 hrs lol"
 ]
 def test():
-  wordsToUse = ["", "", "", "", "", "", "", "", "", ""]
-  times = ["", "", "", "", "", "", "", "", "", ""]
-  characters = 0
-  bigNumber = 0
   accuracy = 1
   system('clear')
+  wordsToUse = ["", "", "", "", "", "", "", "", "", ""]
+  characters = 0
   for a in range(10):
     wordsToUse[a] += str(words[random.randint(0, 119)]) 
     characters += len(wordsToUse[a])
+  times = ["", "", "", "", "", "", "", "", "", ""]
   for b in range(10):
     print("Type: " + str(wordsToUse[b]))
     s = time.time()
@@ -150,8 +149,7 @@ def test():
     times[b] = float(e-s)
     if wordsToUse[b].lower() != str(typeQuery):
       accuracy -= 1/10
-  for c in range(10):
-    bigNumber += times[c]
+  bigNumber = sum(times[c] for c in range(10))
   percentAccuracy = round(accuracy * 100, 1)
   grosswpm = round((characters/5)/(bigNumber/60), 2)
   wpm = round(grosswpm * (percentAccuracy/100), 2)
@@ -171,6 +169,6 @@ def home():
   print("----------------------------------------")
   print("Press [ENTER] to start test")
   startQuery = input(">> ")
-  if str(startQuery) == "":
+  if not str(startQuery):
     test()
 home()
